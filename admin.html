@@ -3,49 +3,67 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b2239">
-<title>PharmaSafe | Admin Dashboard Demo</title>
+<title>PharmaSafe | Admin Login</title>
 <style>
-:root{--navy:#0b2239;--teal:#19a7a0;--ink:#19364b;--muted:#6b7f8d;--line:#e0e9ed;--bg:#f4f8fa;--white:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-header{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:2}
-.brand{display:flex;align-items:center;gap:10px;font-weight:850;color:var(--navy);font-size:19px}.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#176b87,var(--teal));color:white;display:grid;place-items:center;font-size:20px}
-.demo{font-size:11px;font-weight:800;letter-spacing:.8px;background:#fff4df;color:#8b5c12;border:1px solid #f0dfbd;padding:7px 10px;border-radius:30px}
-.layout{max-width:1180px;margin:auto;padding:30px 22px}.heading{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap}.eyebrow{font-size:11px;color:var(--teal);font-weight:850;letter-spacing:1.5px;text-transform:uppercase}h1{font-size:30px;letter-spacing:-1px;margin:5px 0;color:var(--navy)}.sub{color:var(--muted);margin:0;font-size:14px}
-.btn{border:0;border-radius:9px;background:var(--teal);color:white;padding:11px 15px;font-weight:750;cursor:pointer}.btn.outline{background:white;color:var(--navy);border:1px solid var(--line)}
-.notice{margin:22px 0;background:#fff8e9;border:1px solid #f1dfb7;color:#77551e;padding:13px 15px;border-radius:11px;font-size:12px;line-height:1.6}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:22px 0}.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:18px}.stat span{display:block;color:var(--muted);font-size:12px;font-weight:650}.stat strong{display:block;color:var(--navy);font-size:29px;margin-top:7px}.stat small{font-size:11px;color:var(--muted)}
-.panel{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden}.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.panel-head h2{font-size:17px;margin:0;color:var(--navy)}.tools{display:flex;gap:9px;flex-wrap:wrap}.tools input,.tools select{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:inherit;font-size:12px;background:white;color:var(--ink)}
-table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:14px 18px;border-bottom:1px solid #edf1f3;white-space:nowrap}th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;background:#fbfdfe}td{color:#29465a}.status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:800}.pending{background:#fff4df;color:#95651b}.review{background:#e9f2ff;color:#285d9b}.closed{background:#e7f6ee;color:#24734b}.severity{font-weight:750}.empty{padding:25px;text-align:center;color:var(--muted);font-size:13px}
-.footer{color:var(--muted);font-size:11px;text-align:center;padding:22px}
-@media(max-width:760px){header{padding:0 16px}.layout{padding:23px 14px}.stats{grid-template-columns:1fr 1fr}.table-wrap{overflow-x:auto}h1{font-size:26px}}
-</style></head>
+:root{--navy:#0b2239;--teal:#19a7a0;--ink:#19364b;--muted:#6b7f8d;--line:#e0e9ed;--bg:#f4f8fa}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+header{height:68px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 max(22px,calc((100% - 1120px)/2));gap:10px}
+.logo{width:37px;height:37px;border-radius:11px;background:linear-gradient(135deg,#176b87,var(--teal));color:white;display:grid;place-items:center;font-size:21px}.brand{font-size:19px;font-weight:850;color:var(--navy)}
+main{max-width:1120px;margin:38px auto;padding:0 22px}.notice{background:#fff8e9;border:1px solid #f1dfb7;color:#77551e;padding:13px 15px;border-radius:11px;font-size:12px;line-height:1.6;margin-bottom:22px}
+.login{max-width:440px;margin:50px auto;background:white;border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 15px 45px #1832470c}.eyebrow{font-size:11px;letter-spacing:1.4px;color:var(--teal);font-weight:850;text-transform:uppercase}h1{color:var(--navy);font-size:27px;margin:8px 0}.muted{color:var(--muted);font-size:13px;line-height:1.6}
+label{display:block;font-size:13px;font-weight:750;margin:15px 0 6px}input{width:100%;padding:12px;border:1px solid #cfdee4;border-radius:9px;font:inherit}button{border:0;border-radius:9px;background:var(--teal);color:white;padding:12px 16px;font-weight:750;cursor:pointer}button:disabled{opacity:.6;cursor:wait}.wide{width:100%;margin-top:18px}.message{font-size:13px;margin-top:14px;white-space:pre-wrap}.error{color:#b42318}.success{color:#087b70}
+#dashboard{display:none}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}.top h1{margin:0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.stat,.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:18px}.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;color:var(--navy);font-size:27px;margin-top:5px}.panel{padding:0;overflow:hidden}.panel h2{font-size:17px;margin:0;padding:18px;border-bottom:1px solid var(--line);color:var(--navy)}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid #edf1f3;white-space:nowrap}th{color:var(--muted);font-size:10px;text-transform:uppercase}td{color:#29465a}.empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}.pill{display:inline-block;padding:4px 8px;border-radius:20px;background:#fff4df;color:#8a611b;font-size:10px;font-weight:800}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:28px}
+@media(max-width:600px){main{margin:22px auto;padding:0 14px}.login{margin:28px auto;padding:22px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
+</style>
+</head>
 <body>
-<header><div class="brand"><span class="logo">✚</span> PharmaSafe <span style="font-weight:500;color:#718493;font-size:12px">/ Admin</span></div><span class="demo">DEMO DASHBOARD</span></header>
-<main class="layout">
-<div class="heading"><div><div class="eyebrow">Overview</div><h1>Admin dashboard</h1><p class="sub">A sample view of how pharmacovigilance reports could be organized.</p></div><button class="btn outline" onclick="location.href='index.html'">← Back to website</button></div>
-<div class="notice"><strong>Demonstration only:</strong> The records below are fictional sample data. This page has no authentication, backend, secure storage or real report intake. Do not use it to manage real patient information. A production system needs role-based access, privacy safeguards, audit logs and a secure backend.</div>
-<section class="stats">
-<div class="stat"><span>Total demo reports</span><strong id="total">6</strong><small>Fictional sample records</small></div>
-<div class="stat"><span>Awaiting review</span><strong id="pending">3</strong><small>Sample status</small></div>
-<div class="stat"><span>Under review</span><strong id="review">2</strong><small>Sample status</small></div>
-<div class="stat"><span>Closed</span><strong id="closed">1</strong><small>Sample status</small></div>
+<header><span class="logo">✚</span><span class="brand">PharmaSafe</span><span style="color:#718493;font-size:12px">/ Admin</span></header>
+<main>
+<div class="notice"><strong>Development version:</strong> This dashboard is for testing with fictional or non-identifying data only. Do not enter or manage real patient information until the application has undergone a proper security, privacy and regulatory review.</div>
+<section class="login" id="loginBox">
+<div class="eyebrow">Restricted access</div><h1>Admin sign in</h1><p class="muted">Sign in with the Supabase Auth account that has the PharmaSafe admin role.</p>
+<form id="loginForm"><label for="email">Email address</label><input id="email" type="email" autocomplete="username" required value="jayadevsamantaray14@gmail.com"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><button class="wide" id="loginButton" type="submit">Sign in securely</button></form>
+<div class="message" id="loginMessage" role="status" aria-live="polite"></div>
 </section>
-<section class="panel">
-<div class="panel-head"><h2>ADR report register</h2><div class="tools"><input id="search" type="search" placeholder="Search sample reports…"><select id="filter"><option value="All">All statuses</option><option>Pending</option><option>Under review</option><option>Closed</option></select></div></div>
-<div class="table-wrap"><table><thead><tr><th>Demo ID</th><th>Suspected medicine</th><th>Reaction</th><th>Severity</th><th>Received</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div><div class="empty" id="empty" hidden>No matching demo reports.</div>
+<section id="dashboard">
+<div class="top"><div><div class="eyebrow">Overview</div><h1>Admin dashboard</h1><div class="muted" id="signedIn"></div></div><div><button id="refresh" style="background:#176b87">Refresh reports</button> <button id="logout" style="background:#fff;color:#19364b;border:1px solid #dce7eb">Sign out</button></div></div>
+<div class="stats"><div class="stat"><span>Total reports</span><strong id="total">0</strong></div><div class="stat"><span>Pending</span><strong id="pending">0</strong></div><div class="stat"><span>Under review / closed</span><strong id="other">0</strong></div></div>
+<div class="panel"><h2>ADR report register</h2><div class="tablewrap"><table><thead><tr><th>Report ID</th><th>Medicine</th><th>Reaction</th><th>Severity</th><th>Reaction date</th><th>Status</th><th>Received</th></tr></thead><tbody id="reportRows"></tbody></table></div><div class="empty" id="empty">No reports found.</div></div>
+<div class="message" id="dashboardMessage" role="status" aria-live="polite"></div>
 </section>
-<p class="footer">PharmaSafe educational project · Sample data only · Not an official PvPI reporting portal</p>
 </main>
+<footer>PharmaSafe educational project · Not an official PvPI reporting portal</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const reports=[
-{id:"DEMO-001",drug:"Amoxicillin",reaction:"Skin rash",severity:"Mild",date:"2026-11-12",status:"Pending"},
-{id:"DEMO-002",drug:"Metformin",reaction:"Nausea",severity:"Moderate",date:"2026-11-13",status:"Under review"},
-{id:"DEMO-003",drug:"Ibuprofen",reaction:"Stomach discomfort",severity:"Mild",date:"2026-11-14",status:"Pending"},
-{id:"DEMO-004",drug:"Azithromycin",reaction:"Diarrhoea",severity:"Moderate",date:"2026-11-15",status:"Closed"},
-{id:"DEMO-005",drug:"Amlodipine",reaction:"Ankle swelling",severity:"Moderate",date:"2026-11-16",status:"Under review"},
-{id:"DEMO-006",drug:"Cetirizine",reaction:"Drowsiness",severity:"Mild",date:"2026-11-17",status:"Pending"}
-];
-const rows=document.getElementById("rows"),search=document.getElementById("search"),filter=document.getElementById("filter");
-function render(){const q=search.value.toLowerCase(),f=filter.value;const shown=reports.filter(r=>(f==="All"||r.status===f)&&Object.values(r).join(" ").toLowerCase().includes(q));rows.innerHTML=shown.map(r=>`<tr><td><strong>${r.id}</strong></td><td>${r.drug}</td><td>${r.reaction}</td><td class="severity">${r.severity}</td><td>${r.date}</td><td><span class="status ${r.status==="Pending"?"pending":r.status==="Closed"?"closed":"review"}">${r.status}</span></td></tr>`).join("");document.getElementById("empty").hidden=shown.length>0}
-search.addEventListener("input",render);filter.addEventListener("change",render);render();
-</script></body></html>
+const SUPABASE_URL = "https://gdejvuqcgtnqaviymnsd.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_uykPql5aPTxM55NIAbT7dA_LZCY2y1F";
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const $ = id => document.getElementById(id);
+function showMessage(id,text,isError=false){const el=$(id);el.textContent=text;el.className='message '+(isError?'error':'success')}
+function showLogin(){ $('loginBox').style.display='block'; $('dashboard').style.display='none'; }
+function showDashboard(email){ $('loginBox').style.display='none'; $('dashboard').style.display='block'; $('signedIn').textContent='Signed in as '+email; }
+async function verifyAdmin(user){
+  const {data,error}=await client.rpc('is_pharmasafe_admin');
+  if(error) throw new Error('Could not verify admin permissions: '+error.message);
+  if(data!==true) throw new Error('This account is signed in but does not have the PharmaSafe admin role.');
+  return true;
+}
+async function loadReports(){
+  $('reportRows').replaceChildren();$('empty').style.display='none';showMessage('dashboardMessage','Loading reports…');
+  const {data,error}=await client.from('adr_reports').select('id,suspected_medicine,reaction_description,severity,reaction_date,status,created_at').order('created_at',{ascending:false}).limit(200);
+  if(error){showMessage('dashboardMessage','Could not load reports: '+error.message,true);return;}
+  const reports=data||[];const counts={Pending:0,'Under Review':0,Closed:0};reports.forEach(r=>{if(counts[r.status]!==undefined)counts[r.status]++});
+  $('total').textContent=reports.length;$('pending').textContent=counts.Pending;$('other').textContent=counts['Under Review']+counts.Closed;
+  for(const r of reports){const tr=document.createElement('tr');const vals=[String(r.id).slice(0,8),r.suspected_medicine||'—',r.reaction_description||'—',r.severity||'—',r.reaction_date||'—',r.status||'—',r.created_at?new Date(r.created_at).toLocaleString():'—'];for(const v of vals){const td=document.createElement('td');td.textContent=v;tr.appendChild(td)}$('reportRows').appendChild(tr)}
+  $('empty').style.display=reports.length?'none':'block';showMessage('dashboardMessage',reports.length?'Reports loaded.':'No ADR reports have been submitted yet.');
+}
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();const button=$('loginButton');button.disabled=true;showMessage('loginMessage','Signing in…');try{
+ const {data,error}=await client.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
+ if(error)throw error;await verifyAdmin(data.user);showDashboard(data.user.email);await loadReports();
+ }catch(err){await client.auth.signOut();showLogin();showMessage('loginMessage',err.message||'Sign-in failed.',true)}finally{button.disabled=false}});
+$('logout').addEventListener('click',async()=>{await client.auth.signOut();showLogin();$('password').value='';showMessage('loginMessage','You have signed out.')});
+$('refresh').addEventListener('click',loadReports);
+(async()=>{const {data}=await client.auth.getSession();if(data.session){try{await verifyAdmin(data.session.user);showDashboard(data.session.user.email);await loadReports()}catch(e){await client.auth.signOut();showLogin();showMessage('loginMessage',e.message,true)}}})();
+</script>
+</body></html>
